@@ -1,0 +1,49 @@
+<header class="bg-red-500 text-black shadow-lg">
+  <nav class="container mx-auto flex flex-wrap items-center justify-between py-4 px-6">
+    
+    <!-- Logo -->
+    <a href="/" class="text-2xl text-white font-extrabold tracking-wide hover:opacity-90 transition-opacity duration-200">
+      TravelNest
+    </a>
+
+    <!-- Mobile Menu Toggle Button -->
+    <div class="lg:hidden text-white">
+      <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-black focus:outline-none">
+        <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Main Nav Links -->
+    <div id="nav-content" class="hidden w-full lg:flex lg:items-center lg:w-auto text-white">
+      <ul class="lg:flex lg:space-x-4 text-center lg:text-left w-full">
+        <% if (isLoggedIn) { %>
+          <li><a href="/homes" class="block py-2 px-4 rounded <%= currentPage === 'Home' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %> transition duration-200">Homes-List</a></li>
+          <li><a href="/favourites" class="block py-2 px-4 rounded <%= currentPage === 'favourites' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %> transition duration-200">Favourites</a></li>
+          <li><a href="/bookings" class="block py-2 px-4 rounded <%= currentPage === 'bookings' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %> transition duration-200">Bookings</a></li>
+          <li><a href="/host/host-home-list" class="block py-2 px-4 rounded <%= currentPage === 'host-homes' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %> transition duration-200">Host Homes</a></li>
+          <li><a href="/host/add-home" class="block py-2 px-4 rounded <%= currentPage === 'addHome' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %> transition duration-200">Add Home</a></li>
+        <% } %>
+      </ul>
+
+      <!-- Right Side Links -->
+      <ul class="lg:flex lg:space-x-4 text-center lg:text-left mt-4 lg:mt-0 w-full lg:w-auto lg:justify-end">
+        <% if (isLoggedIn) { %>
+          <li><a href="/logout" class="block py-2 px-4 ml-4 rounded bg-white text-red-600 hover:bg-gray-100 transition duration-200">Logout</a></li>
+        <% } else { %>
+          <li><a href="/login" class="block py-2 px-4 rounded <%= currentPage === 'login' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %> transition duration-200">Login</a></li>
+          <li><a href="/signup" class="block py-2 px-4 rounded <%= currentPage === 'signUp' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %> transition duration-200">Sign Up</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Toggle script -->
+  <script>
+    document.getElementById('nav-toggle').addEventListener('click', () => {
+      const navContent = document.getElementById('nav-content');
+      navContent.classList.toggle('hidden');
+    });
+  </script>
+</header>

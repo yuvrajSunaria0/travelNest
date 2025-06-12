@@ -1,0 +1,108 @@
+<!-- works as same as the react components you make it once and then use it every where you want -->
+ <header class="bg-red-500 text-white shadow-lg">
+  <nav class="container mx-auto flex flex-wrap items-center justify-between py-4 px-6">
+    <!-- Logo -->
+    <a href="/" class="text-2xl font-extrabold tracking-wide hover:opacity-90 transition-opacity duration-200">
+      TravelNest
+    </a>
+
+    <!-- Mobile menu toggle button (visible on lg-down) -->
+    <div class="lg:hidden">
+      <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-white border-white hover:border-gray-200 focus:outline-none">
+        <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Main nav links (hidden by default on mobile, flex on lg+) -->
+    <div id="nav-content" class="hidden w-full lg:flex lg:items-center lg:w-auto text-white">
+      <ul class="lg:flex lg:space-x-4 text-center lg:text-left w-full">
+        <!-- Always show Home link -->
+        <li>
+          <a
+            href="/"
+            class="block py-2 px-4 rounded transition duration-200 <%= currentPage === 'index' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %>"
+          >Home</a>
+        </li>
+
+        <% if (isLoggedIn) { %>
+          <% if (user && user.userType === 'guest') { %>
+            <!-- Guest-only Links -->
+            <li>
+              <a
+                href="/homes"
+                class="block py-2 px-4 rounded transition duration-200 <%= currentPage === 'Home' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %>"
+              >Homes-List</a>
+            </li>
+            <li>
+              <a
+                href="/favourites"
+                class="block py-2 px-4 rounded transition duration-200 <%= currentPage === 'favourites' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %>"
+              >Favourites</a>
+            </li>
+            <li>
+              <a
+                href="/bookings"
+                class="block py-2 px-4 rounded transition duration-200 <%= currentPage === 'bookings' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %>"
+              >Bookings</a>
+            </li>
+          <% } %>
+
+          <% if (user && user.userType === 'host') { %>
+            <!-- Host-only Links -->
+            <li>
+              <a
+                href="/host/host-home-list"
+                class="block py-2 px-4 rounded transition duration-200 <%= currentPage === 'host-homes' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %>"
+              >Host Homes</a>
+            </li>
+            <li>
+              <a
+                href="/host/add-home"
+                class="block py-2 px-4 rounded transition duration-200 <%= currentPage === 'addHome' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %>"
+              >Add Home</a>
+            </li>
+            <li>
+              <a
+                href="/host/bookingRequest"
+                class="block py-2 px-4 rounded transition duration-200 <%= currentPage === 'bookingRequest' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %>"
+              >Booking Requests</a>
+            </li>
+          <% } %>
+
+          <!-- Logout (visible to both guest and host) -->
+          <li class="">
+            <a
+              href="/logout"
+              class="block ml-0 sm:ml-4 py-2 px-4 sm:mt-0 mt-3 rounded bg-blue-200 text-red-600 hover:bg-gray-100 transition duration-200"
+            >Logout</a>
+          </li>
+
+        <% } else { %>
+          <!-- Not logged in: show Login / Sign Up -->
+          <li>
+            <a
+              href="/login"
+              class="block py-2 px-4 rounded transition duration-200 <%= currentPage === 'login' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %>"
+            >Login</a>
+          </li>
+          <li>
+            <a
+              href="/signup"
+              class="block py-2 px-4 rounded transition duration-200 <%= currentPage === 'signUp' ? 'bg-white text-red-600' : 'hover:bg-white hover:text-red-600' %>"
+            >Sign Up</a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Mobile toggle script -->
+  <script>
+    document.getElementById('nav-toggle').addEventListener('click', () => {
+      const navContent = document.getElementById('nav-content');
+      navContent.classList.toggle('hidden');
+    });
+  </script>
+</header>

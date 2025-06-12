@@ -1,0 +1,76 @@
+
+<%- include('../partials/head') %>
+</head>
+<body class="bg-gray-100">
+  <%- include('../partials/nav') %>
+
+  <main class="container mx-auto py-12 px-4 max-w-7xl">
+    <h2 class="text-4xl font-bold text-center text-red-500 mb-10">
+      Customers Booking Requests
+    </h2>
+
+    <% if (!bookingDet.length) { %>
+      <p class="text-center text-gray-500">No booking requests at the moment.</p>
+    <% } else { %>
+      <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+       
+        <!-- <% console.log(bookingDet) %> -->
+        <% bookingDet.forEach(home => { %>
+          
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="<%= home.booking.houseId.photo %>"
+                alt="<%= home.booking.houseId.houseName %>"
+                class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            <div class="p-6 space-y-3">
+              <h3 class="text-2xl font-semibold text-gray-800"><%= home.booking.houseId.houseName %></h3>
+              <p class="text-gray-600 flex items-center">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                <%= home.booking.houseId.location %>
+              </p>
+               <div>
+                <h3 class="font-medium text-red-500 text-lg" >Booked By</h3>
+                <p class="text-gray-600 flex items-center">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+               <span class="font-bold mr-1" >Name :</span>   <%= home.user.firstName%> 
+                 <%=home.user.lastName %>
+              </p>
+                <p class="text-gray-600 flex items-center">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                 <span class="font-bold mr-1" >Email : </span> <%= home.user.email %>
+              </p>
+                
+               </div>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-bold text-red-500">
+                  Rs <%= home.booking.houseId.price %> / night
+                </span>
+                <span class="flex items-center text-gray-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-400 mr-1">
+                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd"/>
+                  </svg>
+                  <%= home.booking.houseId.rating %>
+                </span>
+              </div>
+           
+              <form action="/host/delete-booking/<%= home.booking._id %>" method="POST">
+                <button
+                  type="submit"
+                  class="w-full py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors duration-300"
+                >
+                  Cancel Booking
+                </button>
+              </form>
+            </div>
+          </div>
+          
+        <% }) %>
+      </div>
+    <% } %>
+  </main>
+</body>
+</html>

@@ -78,13 +78,13 @@ app.use(express.urlencoded());
  app.use('/host/my-uploads',express.static(path.join(rootDir, 'my-uploads')));
  app.use('/homes/my-uploads',express.static(path.join(rootDir, 'my-uploads')));
 
-app.use(storeRouter);
+
 app.use(authRouter);
 app.use("/host", (req,res,next) =>{
   
   if(req.isLoggedIn){
-   next();
-  // hostRouter
+   next()
+   
 }
    else{
     res.redirect("/login")
@@ -92,6 +92,15 @@ app.use("/host", (req,res,next) =>{
 } );
 app.use("/host",hostRouter);
 
+app.use((req,res,next)=>{
+  if (req.isLoggedIn){
+    next()
+  }
+  else{
+    res.redirect("/login")
+  }
+});
+app.use(storeRouter)
 
 app.use(errorsController.pageNotFound);
 

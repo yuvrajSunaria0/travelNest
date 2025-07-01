@@ -8,8 +8,8 @@
         Here are your booked homes:
       </h2>
       <div class="flex flex-wrap justify-evenly">
-     
-       <% bookingDet.forEach(home => { %>
+       <% console.log(bookingDet) %>
+       <%if(bookingDet!==[]){ bookingDet.forEach(home => { %>
           <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 w-full max-w-sm mt-6">
            <% if (home.photo!=null){ %>
             <img src=<%= home.photo %> alt="<%= home.houseName %>"  class="w-full h-48 object-cover">
@@ -30,7 +30,7 @@
               <form action="/host/delete-booking/<%= home._id %>" method="POST"><button type="submit" class="bg-red-500 p-2">cancel booking</button></form>
             </div>
           </div>
-        <% }) %>
+        <% })} %>
       </div>
     </main>
   </body>

@@ -92,14 +92,14 @@ app.use("/host", (req,res,next) =>{
 } );
 app.use("/host",hostRouter);
 
-app.use((req,res,next)=>{
-  if (req.isLoggedIn){
-    next()
-  }
-  else{
-    res.redirect("/login")
-  }
-});
+// app.use((req,res,next)=>{
+//   if (req.isLoggedIn){
+//     next()
+//   }
+//   else{
+//     res.redirect("/login")
+//   }
+// });
 app.use(storeRouter)
 
 app.use(errorsController.pageNotFound);

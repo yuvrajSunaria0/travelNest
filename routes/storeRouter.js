@@ -8,6 +8,14 @@ const storeController = require("../controllers/storeController.js");
 const favourite = require("../models/favourite.js");
 
 storeRouter.get("/", storeController.getIndex);
+storeRouter.use( (req,res)=>{
+  if (req.isLoggedIn){
+    next()
+  }
+  else{
+    res.redirect("/login")
+  }
+});
 storeRouter.get("/homes", storeController.getHomes);
 storeRouter.get("/bookings", storeController.getBookings);
 storeRouter.post("/bookings", storeController.postGetBookings);

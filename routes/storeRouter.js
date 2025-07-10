@@ -8,7 +8,7 @@ const storeController = require("../controllers/storeController.js");
 const favourite = require("../models/favourite.js");
 
 storeRouter.get("/", storeController.getIndex);
-storeRouter.use( (req,res)=>{
+storeRouter.use( (req,res,next)=>{
   if (req.isLoggedIn){
     next()
   }
